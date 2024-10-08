@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 80
 ENV NAME=MLOpsLab
-CMD ["python", "train.py"]
+CMD ["python3", "train.py"]
