@@ -1,6 +1,5 @@
-name: MLOps Pipeline CI
+name: Python Application
 
-# Trigger the workflow on push or pull request events to the main branch
 on:
   push:
     branches:
@@ -9,29 +8,27 @@ on:
     branches:
       - main
 
-# Define the job to run the workflow
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      # Step 2: Set up Python 3.9
-      - name: Set up Python 3.9
+
+      # Set up Python 3.x environment
+      - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
-      
-      # Step 3: Install dependencies
+          python-version: '3.x'  # You can specify '3.8', '3.9', etc., if you need a specific version
+
+      # Install dependencies (if applicable)
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-      
-      # Step 4: Run the training script
-      - name: Run training script
-        run: |
-          python3 train.py
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt  # Install dependencies from requirements.txt
+
+      # Run your training script
+      - name: Run the training script
+        run: python3 train.py
+

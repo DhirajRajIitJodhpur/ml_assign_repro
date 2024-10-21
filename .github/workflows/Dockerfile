@@ -1,0 +1,24 @@
+FROM python:3.9-slim
+
+WORKDIR /workspace
+COPY . .
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Ensure the script has executable permissions (if needed)
+RUN chmod +x /workspace/train.py
+
+# Optional: Expose port only if you're running a service
+# EXPOSE 80
+
+ENV NAME=MLOpsLab
+CMD ["python3", "train.py"]
+
